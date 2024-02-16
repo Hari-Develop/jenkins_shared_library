@@ -3,13 +3,13 @@
 def decidePipeline(Map configMap){
     application = configMap.get("application")
     switch(application) {
-        case "nodejs"
+        case "nodejs":
             nodejs(configMap) 
             break
-        case "java"
+        case "java":
             java(configMap)
             break
-        case "nodeEKS"
+        case "nodeEKS":
             nodeEKS(configMap)
             break
         default:
