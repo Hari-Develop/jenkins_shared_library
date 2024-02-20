@@ -10,7 +10,7 @@ def call(Map configMap) {
         environment {
             // using the environment variables here
             PackageVersion = ''
-            nexusURL = '172.31.32.58:8081'
+            //nexusURL = '172.31.32.58:8081'
         }
         stages {
             stage("Getting the version of the file") {
@@ -38,7 +38,7 @@ def call(Map configMap) {
                     // Add npm steps here
                     sh """
                         ls -la
-                        zip -q -r catalogue.zip ./* -x jenkinsfile -x ".git" -x "*Jenkinsfile" -x "*.zip"
+                        zip -q -r ${configMap.component}.zip ./* -x jenkinsfile -x ".git" -x "*Jenkinsfile" -x "*.zip"
                         ls -a
                         """ 
                 }
@@ -51,12 +51,12 @@ def call(Map configMap) {
                             nexusUrl: "${nexusURL}",
                             groupId: 'com.roboshop',
                             version: "${PackageVersion}",
-                            repository: 'catalogue',
+                            repository: '${configMap.component}',
                             credentialsId: 'nexus-cred',
                             artifacts: [
-                                [artifactId: 'catalogue',
+                                [artifactId: '${configMap.component}',
                                 classifier: '',
-                                file: 'catalogue.zip',
+                                file: '${configMap.component}.zip',
                                 type: 'zip']
                             ]
                         )
@@ -69,7 +69,7 @@ def call(Map configMap) {
                                 string(name: 'version' , value: "$PackageVersion"),
                                 string(name: 'environment' , value: "dev")
                             ]
-                            build job: 'catalogue-deploy' , wait: true , parameters: params
+                            build job: '${configMap.component}-deploy' , wait: true , parameters: params
                         }
                     }
             }
