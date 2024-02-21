@@ -38,6 +38,7 @@ def call(Map configMap){
                 steps{
                     sh """
                         echo "Build will run here"
+                        ls -a
                     """
                 }
             }
