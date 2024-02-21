@@ -6,7 +6,7 @@ def call(Map configMap){
             }
         }
         environment {
-            packageVersion = "${packageJSON.version}"
+            packageVersion = ""
         }
         parameters {
             choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
