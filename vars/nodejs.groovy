@@ -8,6 +8,9 @@ def call(Map configMap){
         environment {
             packageVersion = "${packageJSON.version}"
         }
+        parameters {
+            choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
+        }
         stages {
             stage('getting the version of the application') {
                 steps {
