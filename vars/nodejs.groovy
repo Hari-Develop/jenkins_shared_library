@@ -14,7 +14,7 @@ def call(Map configMap){
             choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
         }
         stages {
-            stage('getting the version of the application' + packageJSON.version) {
+            stage('getting the version of the application') {
                 steps {
                     script {
                         def packageJSON = readJSON file: 'package.json'
@@ -29,19 +29,26 @@ def call(Map configMap){
                     """
                 }
             }
-            stage(stageName) {
+            stage('unit test case') {
                     steps {
                         sh """
-                            echo "Here we will perform the unit test for version ${packageVersion}"
+                            echo "Here we will perform the unit test}"
                         """
                     }
                 }
-            stage('Building the projectVersion-${packageJSON.version}') {
+            stage('Building stage') {
                 steps{
                     sh """
                         ls -la
-                        zip -q -r 
+                        zip -q -r ${configMap.component}.zip ./* -x ".git" -x "Jenkinsfile"
                         ls -a
+                    """
+                }
+            }
+            stage('static source code analysis') {
+                steps{
+                    sh """
+                        sonar-scanner
                     """
                 }
             }
@@ -49,6 +56,7 @@ def call(Map configMap){
         post {
             success {
                 echo "pipeline is success"
+                deleteDir()
             }
             failure {
                 echo "pipeline is failure"
