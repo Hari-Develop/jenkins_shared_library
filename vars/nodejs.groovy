@@ -20,7 +20,7 @@ def call(Map configMap){
                     }
                 }
             }
-            stage("installing Dependences for projectVersion-${packageJSON.version}"){
+            stage('installing Dependences for projectVersion'){
                 steps {
                     sh """
                         npm install
