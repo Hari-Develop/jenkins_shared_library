@@ -20,21 +20,21 @@ def call(Map configMap){
                     }
                 }
             }
-            stage('installing Dependences for projectVersion'){
+            stage('installing Dependences for projectVersion') {
                 steps {
                     sh """
                         npm install
                     """
                 }
             }
-            stage("unit test for projectVersion-${packageJSON.version}"){
+            stage('unit test for projectVersion-${packageJSON.version}') {
                 steps{
                     sh """
                         echo "Here we will perfume the unit test"
                     """
                 }
             }
-            stage("Building the projectVersion-${packageJSON.version}"){
+            stage('Building the projectVersion-${packageJSON.version}') {
                 steps{
                     sh """
                         echo "Build will run here"
