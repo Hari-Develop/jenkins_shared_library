@@ -7,12 +7,12 @@ def call(Map configMap){
         }
         environment {
             def stageName = [
-                sh """
-                    echo "unit test case will run here for project ${packageJSON.version} "
-                    
-                    """
+                """
+                echo "unit test case will run here for project ${packageJSON.version}"
+                """
             ]
-            packageVersion = ""
+            packageVersion = ''
+
         }
         parameters {
             choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
