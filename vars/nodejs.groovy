@@ -39,7 +39,6 @@ def call(Map configMap){
                         """
                     }
                 }
-            }
             stage('Building the projectVersion-${packageJSON.version}') {
                 steps{
                     sh """
