@@ -7,7 +7,7 @@ def call(Map configMap){
         }
         environment {
             def stageName = [
-                    echo "unit test case will run here for project ${packageJSON.version}"
+                    echo "unit test case will run here for project + $packageJSON.version"
             ]
             packageVersion = ''
 
