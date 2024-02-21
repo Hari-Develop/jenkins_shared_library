@@ -28,18 +28,18 @@ def call(Map configMap){
                 }
             }
             script {
-            // Define the dynamic stage name
-            def stageName = "Unit Test for Project Version ${packageVersion}"
-            
-            // Use the stage function with the dynamic stage name
-            stage(stageName) {
-                steps {
-                    sh """
-                        echo "Here we will perform the unit test for version ${packageVersion}"
-                    """
+                // Define the dynamic stage name
+                def stageName = "Unit Test for Project Version ${packageVersion}"
+                
+                // Use the stage function with the dynamic stage name
+                stage(stageName) {
+                    steps {
+                        sh """
+                            echo "Here we will perform the unit test for version ${packageVersion}"
+                        """
+                    }
                 }
             }
-        }
             stage('Building the projectVersion-${packageJSON.version}') {
                 steps{
                     sh """
