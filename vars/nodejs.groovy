@@ -27,7 +27,7 @@ def call(Map configMap){
                     """
                 }
             }
-            stage("unit test for projectVersion-${packageJSON.version}") {
+            stage('unit test for projectVersion-$packageJSON.version') {
                 steps{
                     sh """
                         echo "Here we will perfume the unit test"
