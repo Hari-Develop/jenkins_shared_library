@@ -26,7 +26,8 @@ def call(Map configMap){
                         npm install
                     """
                 }
-            }script {
+            }
+            script {
             // Define the dynamic stage name
             def stageName = "Unit Test for Project Version ${packageVersion}"
             
