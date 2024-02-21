@@ -43,5 +43,13 @@ def call(Map configMap){
                 }
             }
         }
+        post {
+            success {
+                echo "pipeline is success"
+            }
+            failure {
+                echo "pipeline is failure"
+            }
+        }
     }
 }
