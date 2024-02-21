@@ -6,9 +6,7 @@ def call(Map configMap){
             }
         }
         environment {
-            def stageName = {
-                    echo "unit test case will run here for project ${packageJSON.version}"
-            }
+
             packageVersion = ''
 
         }
@@ -16,7 +14,7 @@ def call(Map configMap){
             choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
         }
         stages {
-            stage('getting the version of the application') {
+            stage('getting the version of the application' + packageJSON.version) {
                 steps {
                     script {
                         def packageJSON = readJSON file: 'package.json'
@@ -24,7 +22,7 @@ def call(Map configMap){
                     }
                 }
             }
-            stage('installing Dependences for projectVersion') {
+            stage('installing Dependences project version') {
                 steps {
                     sh """
                         npm install
