@@ -12,9 +12,6 @@ def call(Map configMap){
         environment {
             packageVersion = ''
         }
-        parameters {
-            choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
-        }
         stages {
             stage('getting the version of the application') {
                 steps {
