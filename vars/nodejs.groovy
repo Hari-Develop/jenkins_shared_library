@@ -76,7 +76,7 @@ def call(Map configMap){
                     script {
                         def params = [
                             string(name: "packageVersion" , value: "${packageVersion}"),
-                            string(name : "envirnoment" , value: "dev")
+                            string(name : "environment" , value: "dev")
                         ]
                         build job: "../${configMap.component}-deploy" , parameters: params
                     }
