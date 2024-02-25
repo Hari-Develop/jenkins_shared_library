@@ -5,10 +5,12 @@ def call(Map configMap){
                 label "Jenkins_agent"
             }
         }
+        options {
+            disableConcurrentBuilds()
+            ansiColor('xterm')
+        }
         environment {
-
             packageVersion = ''
-
         }
         parameters {
             choice(name: "action" , choices: ["apply","destroy"] , description: "select the action")
@@ -36,6 +38,13 @@ def call(Map configMap){
                         """
                     }
                 }
+            stage('static source code analysis') {
+                steps{
+                    sh """
+                        sonar-scanner
+                    """
+                }
+            }
             stage('Building stage') {
                 steps{
                     sh """
@@ -45,11 +54,23 @@ def call(Map configMap){
                     """
                 }
             }
-            stage('static source code analysis') {
+            stage('Pushing the artifact to the nexus repo') {
                 steps{
-                    sh """
-                        sonar-scanner
-                    """
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: pipelineGlobals.nexusUrl(),
+                        groupId: 'com.roboshop',
+                        version: "${packageVersion}",
+                        repository: "${configMap.component}",
+                        credentialsId: 'nexus-cred',
+                        artifacts: [
+                            [artifactId: "${configMap.component}",
+                                classifier: '',
+                                file: "${configMap.component}.zip",
+                                type: 'zip']
+                        ]
+                    )
                 }
             }
         }
