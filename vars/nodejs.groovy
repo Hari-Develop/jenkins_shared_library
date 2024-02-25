@@ -72,7 +72,7 @@ def call(Map configMap){
                 }
             }
             stage ("calling a deploy job from CI"){
-                def params [
+                def params = [
                     string(name: "packageVersion" , value: "${packageVersion}"),
                     string(name : "envirnoment" , value: "dev")
                 ]
