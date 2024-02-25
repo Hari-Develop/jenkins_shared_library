@@ -78,7 +78,7 @@ def call(Map configMap){
                     string(name: "packageVersion" , value: "${packageVersion}"),
                     string(name : "envirnoment" , value: "dev")
                 ]
-                build job: "../${configMap.component}-deploy"
+                build job: "../${configMap.component}-deploy" wait: true , parameters: params
                     }
                 }
             }
