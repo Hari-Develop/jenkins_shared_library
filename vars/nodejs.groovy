@@ -71,6 +71,13 @@ def call(Map configMap){
                     )
                 }
             }
+            stage ("calling a deploy job from CI"){
+                def params [
+                    string(name: "packageVersion" , value: "${packageVersion}"),
+                    string(name : "envirnoment" , value: "dev")
+                ]
+                build job: "../${configMap.component}-deploy"
+            }
         }
         post {
             success {
