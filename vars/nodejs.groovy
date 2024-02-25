@@ -75,10 +75,10 @@ def call(Map configMap){
                 steps {
                     script {
                         def params = [
-                    string(name: "packageVersion" , value: "${packageVersion}"),
-                    string(name : "envirnoment" , value: "dev")
-                ]
-                build job: "../${configMap.component}-deploy" , parameters: params
+                            string(name: "packageVersion" , value: "${packageVersion}"),
+                            string(name : "envirnoment" , value: "dev")
+                        ]
+                        build job: "../${configMap.component}-deploy" , parameters: params
                     }
                 }
             }
