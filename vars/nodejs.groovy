@@ -46,7 +46,7 @@ def call(Map configMap){
                 steps{
                     sh """
                         ls -la
-                        zip -q -r ${configMap.component}.zip ./* -x ".git" -x "Jenkinsfile"
+                        zip -q -r ${configMap.component}.zip ./* -x ".git" -x "Jenkinsfile" -x "sonar-project.properties"
                         ls -a
                     """
                 }
