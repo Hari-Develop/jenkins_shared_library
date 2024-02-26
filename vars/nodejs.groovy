@@ -72,6 +72,11 @@ def call(Map configMap){
                 }
             }
             stage ("calling a deploy job from CI"){
+                when {
+                    experssion {
+                        params.Deploy
+                    }
+                }
                 steps {
                     script {
                         def params = [
